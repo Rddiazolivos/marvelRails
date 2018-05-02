@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container-fluid">
+  <div class="row">
+    <h1>
+      Personajes
+    </h1>
+  </div>
+  <div class="row">
+    <% @characters.each do |character| %>
+      <div class="col-sm-4">
+          <div class="panel panel-default">
+            <div class="panel-heading text-center">
+              <img src="<%= character['thumbnail']['path']+"/standard_medium."+character['thumbnail']['extension'] %>" class="img-circle" alt="Cinque Terre">
+            </div>
+            <div class="panel-body">
+              <%= character['name'] %>
+            </div>
+          </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'New Character', new_character_path %>

@@ -58,6 +58,7 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+gem 'httparty'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
