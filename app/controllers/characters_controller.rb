@@ -6,14 +6,29 @@ class CharactersController < ApplicationController
   # GET /characters
   # GET /characters.json
   def index
+    if !params[:page].nil?
+      offsetCal = (params[:page].to_i * 18) - 18
+      @numeroPag  = params[:page].to_i
+    else
+      offsetCal = 0
+      @numeroPag  = 1
+    end
     query = { 
+      "limit"       => 18,
+      "offset"      => offsetCal,
       "apikey"      => 'c290f2f4d5816c7da871c60303b10a9c',
       "ts"          => '1',
       "hash"        => Digest::MD5.hexdigest('14a3d0f1b2198c665b8143755d81a1c25f40899f9c290f2f4d5816c7da871c60303b10a9c'),
     }
     response = HTTParty.get("https://gateway.marvel.com:443/v1/public/characters", :query => query , format: :json)
     if response.code == 200
-      @characters = response.parsed_response['data']['results']
+      cantPag = response.parsed_response['data']['total'] / 18
+      if cantPag % 2 == 0
+       @paginas = cantPag +1
+      else
+        @paginas =  cantPag
+      end
+      @characters = response.parsed_response['data']['results']      
     end
   end
 

@@ -22,4 +22,10 @@
   </div>
 </div>
 
-<%= link_to 'New Character', new_character_path %>
+<ul class="pagination">
+  <% (1 .. @paginas).each do |i| %>
+    <li <%= if @numeroPag == i; "class=active"; end %>>
+      <%= link_to i, characters_path(:page => i) %>
+    </li>
+  <% end %>
+</ul>

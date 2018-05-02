@@ -1,0 +1,22 @@
+<%= form_with(model: battle, local: true, :class => "form-inline") do |form| %>
+  <% if battle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(battle.errors.count, "error") %> prohibited this battle from being saved:</h2>
+
+      <ul>
+      <% battle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :Usuario, :for => "user_name" %>
+    <%= form.collection_select :user_id, @users, :id, :name , {include_blank: 'Por favor selecciona una personaje'}, {class: 'form-control'}%>
+  </div>
+
+  
+    <%= form.submit 'Crear', :class => "btn btn-primary" %>
+  
+<% end %>

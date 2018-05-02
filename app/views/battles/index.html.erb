@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Batallas</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+    	<th>Usuario</th>
+      <th>Personaje</th>
+      <th>Resultado</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @battles.each do |battle| %>
+      <tr>
+      	<td><%= battle.name %></td>
+        <td><%= battle.name %></td>
+        <td><%= battle.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
