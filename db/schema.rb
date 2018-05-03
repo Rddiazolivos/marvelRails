@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_05_02_210305) do
   enable_extension "plpgsql"
 
   create_table "battles", force: :cascade do |t|
-    t.string "name"
+    t.boolean "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2018_05_02_210305) do
   end
 
   create_table "characters", force: :cascade do |t|
+    t.integer "code"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_05_02_210305) do
 
   create_table "users", force: :cascade do |t|
     t.text "name"
-    t.string "status"
+    t.boolean "status", default: true
     t.integer "score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,6 +1,4 @@
-require 'digest/md5'
 class CharactersController < ApplicationController
-  include HTTParty
   before_action :set_character, only: [:show, :edit, :update, :destroy]
 
   # GET /characters
@@ -13,14 +11,7 @@ class CharactersController < ApplicationController
       offsetCal = 0
       @numeroPag  = 1
     end
-    query = { 
-      "limit"       => 18,
-      "offset"      => offsetCal,
-      "apikey"      => 'c290f2f4d5816c7da871c60303b10a9c',
-      "ts"          => '1',
-      "hash"        => Digest::MD5.hexdigest('14a3d0f1b2198c665b8143755d81a1c25f40899f9c290f2f4d5816c7da871c60303b10a9c'),
-    }
-    response = HTTParty.get("https://gateway.marvel.com:443/v1/public/characters", :query => query , format: :json)
+    response = Character.getDataMarvel(offsetCal, 18)
     if response.code == 200
       cantPag = response.parsed_response['data']['total'] / 18
       if cantPag % 2 == 0
