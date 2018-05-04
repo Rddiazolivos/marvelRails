@@ -1,14 +1,9 @@
-<p id="notice"><%= notice %></p>
-<div class="text-center">
-  <h1>Batallas</h1>
-  <%= link_to 'Iniciar ronda de batallas', batallas_path , :class => "btn btn-primary" %>
-</div> 
+<h3><%= @user.name %> <small><%= @user.score %> Pts. </small></h3>
 
 <table class="table">
   <thead>
     <tr>
-    	<th>Usuario</th>
-      <th>Personaje</th>
+      <th>Contrincante</th>
       <th>Resultado</th>
     </tr>
   </thead>
@@ -16,7 +11,6 @@
   <tbody>
     <% @battles.each do |battle| %>
       <tr>
-      	<td><%= battle.user.name %></td>
         <td><%= battle.character.name %></td>
         <td><%= battle.result ? :Victoria : :Derrota %></td>
       </tr>

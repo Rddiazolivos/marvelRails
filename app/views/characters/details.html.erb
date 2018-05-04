@@ -1,0 +1,88 @@
+<% @characters.each do |character| %>
+<div class="row">
+	<div class="col-sm-4 col-sm-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <img src="<%= character['thumbnail']['path']+"/standard_medium."+character['thumbnail']['extension'] %>" class="img-circle" alt="Cinque Terre">
+        </div>
+        <div class="panel-body">
+          <%= character['name'] %>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+	<div class="panel-group" id="accordion">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+	        Comics <small><%= character['comics']['available'] %></small></a>
+	      </h4>
+	    </div>
+	    <div id="collapse1" class="panel-collapse collapse">
+	      <div class="panel-body">
+	      	<ul>
+	      		<% character['comics']['items'].each do |item| %>
+	      		<li><%= item['name'] %></li>
+	      		<% end %>
+	      	</ul>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+	        Series <small><%= character['series']['available'] %></small></a>
+	      </h4>
+	    </div>
+	    <div id="collapse2" class="panel-collapse collapse">
+	      <div class="panel-body">
+	      	<ul>
+	      		<% character['series']['items'].each do |item| %>
+	      		<li><%= item['name'] %></li>
+	      		<% end %>
+	      	</ul>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+	        Historias <small><%= character['stories']['available'] %></small></a>
+	      </h4>
+	    </div>
+	    <div id="collapse3" class="panel-collapse collapse">
+	      <div class="panel-body">
+	      	<ul>
+	      		<% character['stories']['items'].each do |item| %>
+	      		<li><%= item['name'] %></li>
+	      		<% end %>
+	      	</ul>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+	        Eventos <small><%= character['events']['available'] %></small></a>
+	      </h4>
+	    </div>
+	    <div id="collapse4" class="panel-collapse collapse">
+	      <div class="panel-body">
+	      	<ul>
+	      		<% character['events']['items'].each do |item| %>
+	      		<li><%= item['name'] %></li>
+	      		<% end %>
+	      	</ul>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+      
+<% end %>

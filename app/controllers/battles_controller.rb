@@ -1,6 +1,7 @@
 class BattlesController < ApplicationController
+  before_action :set_battle, only: [:show]
 	def index
-		@battles = Battle.all
+		@battles = Battle.order(id: :desc)
 	end
 
 	# GET /battles/new
@@ -14,20 +15,13 @@ class BattlesController < ApplicationController
   def create
   	@users = User.all  	
     usuario = User.find(params[:battle][:user_id])
-    if usuario.status
-      redirect_to user_path(usuario.id) and return
+    #Valida que el suuario pueda luchar
+    if !usuario.status
+      redirect_to user_path(usuario.id), notice: "El usuario no posee vidas" and return
     end
     @battle = Battle.new(battle_params)
-    @battle.result = Battle.resultado
-    personaje = Battle.last
-    if personaje.nil?
-      code = Character.first
-      code = code.id
-    else
-      code = personaje.character_id
-      code = code +1
-    end
-    @battle.character_id = code
+    @battle.result = Battle.resultado  
+    @battle.character_id = Battle.getCharacterBattle
     if @battle.result 
     	User.setPuntaje(params[:battle][:user_id])
     else
@@ -46,8 +40,14 @@ class BattlesController < ApplicationController
   end
 
   def batalla
-    user = User.find(params['user_id'])
-    redirect_to :root if user.status
+    faltantes = User.where(:status => true).count
+    if faltantes > 0
+      Battle.rondaBatallas
+      redirect_to battles_path, notice: "Ronda de batallas finalizada"
+    else
+      redirect_to battles_path, notice: "No posee usuarios con vida"
+    end
+    
   end
 
   private

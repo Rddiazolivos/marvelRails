@@ -58,6 +58,8 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+#Gemas agregas por mi
+gem 'whenever', require: false
 gem 'httparty'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.2.0'

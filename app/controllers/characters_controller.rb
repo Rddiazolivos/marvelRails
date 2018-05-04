@@ -77,6 +77,13 @@ class CharactersController < ApplicationController
     end
   end
 
+  def details
+    response = Character.getCharacter(params[:code])
+    if response.code == 200
+      @characters = response.parsed_response['data']['results']      
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_character

@@ -3,7 +3,10 @@
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
+  <strong>Estado:</strong>
+  <%= @user.status ? :Vivo : :Muerto %>
 </p>
 
+<%= if !@user.status; link_to 'Revivir', revivir_path('id' => @user); end %> |
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

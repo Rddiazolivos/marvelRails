@@ -40,4 +40,14 @@ class Character < ApplicationRecord
       character.save
     end
   end
+
+  def self.getCharacter(codigo)
+    query = { 
+      "apikey"      => 'c290f2f4d5816c7da871c60303b10a9c',
+      "ts"          => '1',
+      "hash"        => Digest::MD5.hexdigest('14a3d0f1b2198c665b8143755d81a1c25f40899f9c290f2f4d5816c7da871c60303b10a9c'),
+    }
+    response = HTTParty.get("https://gateway.marvel.com:443/v1/public/characters/"+codigo, :query => query , format: :json)
+  end
+
 end

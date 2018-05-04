@@ -61,6 +61,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def revivir
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update(:status => true)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def historial
+    @user = User.find(params[:id])
+    @battles = Battle.where("user_id = ?", params[:id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

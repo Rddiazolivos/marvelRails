@@ -7,17 +7,38 @@ class Battle < ApplicationRecord
 	end
 
 	def self.getCharacterBattle
-		ultimaBatalla = Battle.last
-		if ultimaBatalla.nil?
-			ultimoCharacter = -1
-		else
-			ultimoCharacter = ultimaBatalla.code_character
-		end
-		
-		fin = Character.getCantidadCharacter
-		if ultimoCharacter < fin
-			personaje = Character.getDataMarvel(ultimoCharacter +1, 1)
-		end
-		return personaje
+		personaje = Battle.last
+	    if personaje.nil?
+	      code = Character.first
+	      code = code.id
+	    else
+	      code = personaje.character_id
+	      code = code +1
+	    end
+		return code
+	end
+
+	def self.rondaBatallas
+		@users = User.all
+		@users.each do |usuario|
+	    #Valida que el usuario pueda luchar
+	    if !usuario.status
+	      next
+	    end
+	    resultado = true
+	    while resultado
+	    	battle = Battle.new
+		    battle.user_id = usuario.id
+		    battle.result = Battle.resultado	    
+		    battle.character_id = getCharacterBattle
+		    if battle.result 
+		    	User.setPuntaje(usuario.id)
+		    else
+		      User.setEstado(usuario.id)
+		    end
+		    battle.save
+		    resultado = battle.result
+	    end	    
+		end    
 	end
 end
