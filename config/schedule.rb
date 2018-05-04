@@ -1,3 +1,3 @@
 every 1.minutes do
-	runner "Battle.rondaBatallas"	
+	rake "tasks:startBattle"	
 end
