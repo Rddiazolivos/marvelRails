@@ -74,6 +74,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def revivirAll
+    User.revivirAll
+    redirect_to users_path, notice: 'Usuarios revividos.'
+  end
+
+  def resetAll
+    User.resetAll
+    redirect_to ranking_path, notice: 'Ranking reiniciado.'
+  end
+
   def historial
     @user = User.find(params[:id])
     @battles = Battle.where("user_id = ?", params[:id])

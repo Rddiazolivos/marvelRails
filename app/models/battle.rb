@@ -7,7 +7,7 @@ class Battle < ApplicationRecord
 	end
 
 	def self.getCharacterBattle
-		personaje = Battle.last
+		personaje = Battle.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).last
 	    if personaje.nil?
 	      code = Character.first
 	      code = code.id

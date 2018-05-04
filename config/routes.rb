@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'revivir', to: 'users#revivir'
   get 'historial', to: 'users#historial'
   get 'details', to: 'characters#details'
+  get 'revivirAll', to: 'users#revivirAll'
+  get 'resetAll', to: 'users#resetAll'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
 	
